@@ -35,7 +35,7 @@ def current(request):
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return redirect('current')
 
 def loginuser(request):
     if request.method == 'GET':

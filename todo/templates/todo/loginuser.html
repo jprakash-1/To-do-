@@ -1,5 +1,7 @@
 {% extends 'todo/base.html' %}
 {% block content %}
+
+<div style="margin-top: 100px;">
 <h2>login</h2>
 
 <h2>{{ error }}</h2>
@@ -8,9 +10,9 @@
     {% csrf_token %}
     {{ forms.as_p }}
     
-    <button type="submi">SignUP</button>
+    <button type="submit">login</button>
 </div>
 
 </form>
-
-{% endblock %}
+</div>
+{% endblock %} 
