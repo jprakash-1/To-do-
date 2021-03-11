@@ -33,9 +33,8 @@ def current(request):
     return render(request,'todo/current.html')
 
 def logoutuser(request):
-    if request.method == 'POST':
         logout(request)
-        return redirect('current')
+        return redirect('home')
 
 def loginuser(request):
     if request.method == 'GET':
