@@ -2,15 +2,28 @@
 {% block content %}
 
 <div style="margin-top: 100px;">
-<h2>login</h2>
 
 <h2>{{ error }}</h2>
-<div class="content-section">
+<div class="container login">
+<h2>Login</h2>
 <form method="POST">
     {% csrf_token %}
-    {{ forms.as_p }}
-    
-    <button type="submit">login</button>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="test" name = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Username is unique for everyone</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name = "password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
 </div>
 
 </form>
