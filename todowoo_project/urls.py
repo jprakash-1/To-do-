@@ -25,6 +25,6 @@ urlpatterns = [
     path('login/',views.loginuser,name = 'loginuser'),
     # To do
     path('',views.home,name = 'home'),
-    path('current/',views.current,name = 'current'),
+    path('about/',views.current,name = 'current'),
 
 ]
