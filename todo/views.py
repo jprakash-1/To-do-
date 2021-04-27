@@ -10,18 +10,21 @@ def home(request):
     return render(request,'todo/home.html')
 
 def signupuser(request):
+    # Here we get into signup page didn't filled the detail and submit it.
     if request.method == 'GET':
         return render(request,'todo/signupuser.html',{'forms':UserCreationForm()})
     else :
+        # Here we get into signup page did fill the detail and submit it.
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(request.POST['username'],password = request.POST['password1'])
-                user.save()
+                user.save()             # Save the user detail in the database
                 # When user signed in redirect to new url.
                 login(request,user)
                 return redirect('current')
 
-            except IntegrityError:
+            # Check Weather username is unique or not. 
+            except IntegrityError:     
                 return render(request,'todo/signupuser.html',{'forms':UserCreationForm(),'error':'Username is already taken try other!'})
 
         else:

@@ -1,11 +1,10 @@
 .login{
     margin: 100px 200px;
     width:800px; /*width of your image*/
-    background-image: url('https://media.moddb.com/cache/images/groups/1/8/7872/thumb_620x2000/15649.jpg');
     margin:0; /* If you want no margin */
     padding:0; /*if your want to padding */
-    color:red;
-    font-style: italic;
+    color:black;
+
     
 }
 
