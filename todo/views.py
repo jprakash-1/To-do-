@@ -36,8 +36,8 @@ def current(request):
     return render(request,'todo/current.html')
 
 def logoutuser(request):
-        logout(request)
-        return redirect('home')
+        logout(request)                                    # Creating a logout request. 
+        return redirect('home')                            # Redirecting it to home page.
 
 def loginuser(request):
     if request.method == 'GET':
