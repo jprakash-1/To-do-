@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
+from .forms import TodoForm
 
 # Create your views here.
 
@@ -49,3 +50,16 @@ def loginuser(request):
         else :
             login(request,user)
             return redirect('home')
+
+def createtodo(request):
+    if request.method == 'GET':
+        return render(request,'todo/createtodo.html',{'forms':TodoForm()})
+    else :
+        try :
+            form = TodoForm(request.POST)
+            newtodo = form.save(commit=False)
+            newtodo.user = request.user
+            newtodo.save()
+            return redirect('current')
+        except ValueError :
+            return render(request,'todo/createtodo.html',{'forms':TodoForm(),'error':"Bad Data Try Again !"})

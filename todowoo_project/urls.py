@@ -26,5 +26,7 @@ urlpatterns = [
     # To do
     path('',views.home,name = 'home'),
     path('current/',views.current,name = 'current'),
+    path('create/',views.createtodo,name = 'createtodo'),
+    
 
 ]

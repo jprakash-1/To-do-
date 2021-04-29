@@ -1,0 +1,30 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+
+<div style="margin-top: 100px;">
+
+<h1>Create</h1>
+<h2>{{ error }}</h2>
+<div class="container">
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" name = "title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Title can not be empty.</small>
+      </div>
+      <div class="form-outline">
+        <textarea class="form-control" id="textAreaExample" name = 'memo' rows="4"></textarea>
+        <label class="form-label" for="textAreaExample" >Message</label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name = "important">
+        <label class="form-check-label" for="exampleCheck1">Important</label>
+      </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+
+{% endblock %} 
