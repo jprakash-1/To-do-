@@ -66,6 +66,6 @@ def createtodo(request):
             return render(request,'todo/createtodo.html',{'forms':TodoForm(),'error':"Bad Data Try Again !"})
 
 
-def current(request):
-    todos = Todo.objects.filter(user=request.user)
+def current(request):   
+    todos = Todo.objects.filter(user=request.user)          # select the todo list of user logged in. 
     return render(request,'todo/current.html', {'todos':todos})
