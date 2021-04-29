@@ -52,15 +52,20 @@ def loginuser(request):
             login(request,user)
             return redirect('home')
 
+
+"""
+    Creating createtodo  
+
+"""
 def createtodo(request):
     if request.method == 'GET':
         return render(request,'todo/createtodo.html',{'forms':TodoForm()})
     else :
         try :
-            form = TodoForm(request.POST)
-            newtodo = form.save(commit=False)
-            newtodo.user = request.user
-            newtodo.save()
+            form = TodoForm(request.POST)           # Put all the data we get from webpage 
+            newtodo = form.save(commit=False)       # commit = False means don't save to database yet and create newtodo object to copy form object value.
+            newtodo.user = request.user             # here in new object populating the user name that is logged in. 
+            newtodo.save()                          # Saving the value.
             return redirect('current')
         except ValueError :
             return render(request,'todo/createtodo.html',{'forms':TodoForm(),'error':"Bad Data Try Again !"})
