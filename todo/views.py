@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
 from .forms import TodoForm
+from .models import Todo
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def signupuser(request):
                 user.save()             # Save the user detail in the database
                 # When user signed in redirect to new url.
                 login(request,user)
-                return redirect('current')
+                return redirect('about')
 
             # Check Weather username is unique or not. 
             except IntegrityError:     
@@ -33,8 +34,8 @@ def signupuser(request):
             return render(request,'todo/signupuser.html',{'forms':UserCreationForm(),'error':'Password did not match'})
 
 
-def current(request):
-    return render(request,'todo/current.html')
+def about(request):
+    return render(request,'todo/about.html')
 
 def logoutuser(request):
         logout(request)                                    # Creating a logout request. 
@@ -63,3 +64,8 @@ def createtodo(request):
             return redirect('current')
         except ValueError :
             return render(request,'todo/createtodo.html',{'forms':TodoForm(),'error':"Bad Data Try Again !"})
+
+
+def current(request):
+    todos = Todo.objects.filter(user=request.user)
+    return render(request,'todo/current.html', {'todos':todos})
