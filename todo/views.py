@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
 from .forms import TodoForm
 from .models import Todo
+from django.utils import timezone
 
 # Create your views here.
 
@@ -72,18 +73,33 @@ def createtodo(request):
 
 
 def current(request):   
-    todos = Todo.objects.filter(user=request.user)          # select the todo list of user logged in. 
+    todos = Todo.objects.filter(user=request.user,datecompleted__isnull = True)          # select the todo list of user logged in. 
     return render(request,'todo/current.html', {'todos':todos})
 
 def viewtodo(request,todo_pk):
-    todo = get_object_or_404(Todo,pk = todo_pk,user = request.user)
+    todo = get_object_or_404(Todo,pk = todo_pk,user = request.user)         # Get object or return 404
     if  request.method == 'GET':
-        form = TodoForm(instance=todo)
+        form = TodoForm(instance=todo)                                      # instance = todo means fill the data in form that was available in todo
         return render(request,'todo/viewtodo.html', {'todo':todo,'form':form})    
     else :
         try:
-            form = TodoForm(request.POST,instance=todo) 
+            form = TodoForm(request.POST,instance=todo)                     # Update the todo form and save it.
             form.save()
             return redirect('current')
         except ValueError():
             return render(request,'todo/viewtodo.html', {'todo':todo,'form':form,'error': "Bad Data Try Again !"}) 
+
+
+def completetodo(request,todo_pk):
+    todo = get_object_or_404(Todo,pk = todo_pk,user = request.user) 
+    if  request.method == 'POST':
+        todo.datecompleted = timezone.now()
+        todo.save()
+        return redirect('current')
+
+
+def deletetodo(request,todo_pk):
+    todo = get_object_or_404(Todo,pk = todo_pk,user = request.user) 
+    if  request.method == 'POST':
+        todo.delete()
+        return redirect('current')
