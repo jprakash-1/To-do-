@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -74,3 +74,16 @@ def createtodo(request):
 def current(request):   
     todos = Todo.objects.filter(user=request.user)          # select the todo list of user logged in. 
     return render(request,'todo/current.html', {'todos':todos})
+
+def viewtodo(request,todo_pk):
+    todo = get_object_or_404(Todo,pk = todo_pk,user = request.user)
+    if  request.method == 'GET':
+        form = TodoForm(instance=todo)
+        return render(request,'todo/viewtodo.html', {'todo':todo,'form':form})    
+    else :
+        try:
+            form = TodoForm(request.POST,instance=todo) 
+            form.save()
+            return redirect('current')
+        except ValueError():
+            return render(request,'todo/viewtodo.html', {'todo':todo,'form':form,'error': "Bad Data Try Again !"}) 

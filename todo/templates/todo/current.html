@@ -12,9 +12,10 @@
         <div class="welcome-text">
             {% for  todo in todos %}
                 <ul>
-                    <li>{% if todo.important %}<b>{% endif %} {{ todo.title }}  {% if todo.important %} </b> {% endif %} </li>
-                    {% if todo.important %} - {{ todo.memo }} {% endif %}
-                    
+                    <a href="{% url 'viewtodo' todo.id %}">
+                        <li>{% if todo.important %}<b>{% endif %} {{ todo.title }}  {% if todo.important %} </b> {% endif %} </li>
+                        {% if todo.important %} - {{ todo.memo }} {% endif %}
+                    </a>
                 </ul>
             {% endfor %}
         </div>
