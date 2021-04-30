@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+    <title>Current Todos</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div style="margin-top: 100px;">
+
+        <div class="welcome-text">
+            {% for  todo in todos %}
+                <ul>
+                        <li>{% if todo.important %}<b>{% endif %} {{ todo.title }}  {% if todo.important %} </b> {% endif %} </li>
+                        {% if todo.important %} - {{ todo.memo }} {% endif %}
+                        <br>
+                        <p style="color:rgb(58, 18, 235);">Date completed   -   {{ todo.datecompleted|date:'M j Y H:i' }}</p>
+                    
+                </ul>
+            {% endfor %}
+        </div>
+
+</div>
+
+{% endblock %}
