@@ -6,7 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from .forms import TodoForm
 from .models import Todo
 from django.utils import timezone
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required           # this will make sure that we need to login to use this function.
 
 
 # Create your views here.
@@ -108,7 +108,8 @@ def viewtodo(request,todo_pk):
 def completetodo(request,todo_pk):
     todo = get_object_or_404(Todo,pk = todo_pk,user = request.user) 
     if  request.method == 'POST':
-        todo.datecompleted = timezone.now()
+        # current time has been stored as we put timezone.now() in datecompleted part.
+        todo.datecompleted = timezone.now()             # As we are checking Completed todo from their time completed.
         todo.save()
         return redirect('current')
 
@@ -118,5 +119,5 @@ def completetodo(request,todo_pk):
 def deletetodo(request,todo_pk):
     todo = get_object_or_404(Todo,pk = todo_pk,user = request.user) 
     if  request.method == 'POST':
-        todo.delete()
+        todo.delete()                           # Delete the data from database.
         return redirect('current')

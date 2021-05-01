@@ -18,41 +18,42 @@
 </head>
 
 <body>
-  <div class="container mr-auto">
-    <nav class="navbar navbar-expand-md navbar-light bg-steel fixed-top">
-      <div class="container">
-        <a class="navbar-brand mr-4" href="{% url 'home' %}">Todo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
-          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
-            {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'current' %}">Current</a>
-            <a class="nav-item nav-link" href="{% url 'createtodo' %}">Create</a>
-            <a class="nav-item nav-link" href="{% url 'completedtodos' %}">Completed</a>
-            {% endif %}
-          </div>
-          <!-- Navbar Right Side -->
-          <div class="navbar-nav">
-            {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'logoutuser' %}">Logout</a>
-            {% else %}
-            <a class="nav-item nav-link" href="{% url 'loginuser' %}">Login</a>
-            <a class="nav-item nav-link" href="{% url 'signupuser' %}">SignUp</a>
-            {% endif %}
-          </div>
+  <div class="container mr-auto" ">
+    <nav class=" navbar navbar-expand-md navbar-light bg-steel fixed-top" style="background-color: yellow;">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="{% url 'home' %}"><img src="{% static 'todo/img.jpg' %}" height="30px"> Todo
+        Woo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+        aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'current' %}">Current</a>
+          <a class="nav-item nav-link" href="{% url 'createtodo' %}">Create</a>
+          <a class="nav-item nav-link" href="{% url 'completedtodos' %}">Completed</a>
+          {% endif %}
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'logoutuser' %}">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'loginuser' %}">Login</a>
+          <a class="nav-item nav-link" href="{% url 'signupuser' %}">SignUp</a>
+          {% endif %}
         </div>
       </div>
+    </div>
     </nav>
   </div>
   <div class="container">
-    <div style="margin-top: 50px;">
-    {% if user.is_authenticated %}
-    Hello {{ user.username}} <br>
-    {% endif %}
+    <div style="margin-top: 100px;">
+      {% if user.is_authenticated %}
+      Hello {{ user.username}} <br>
+      {% endif %}
     </div>
     {% block content %}
 

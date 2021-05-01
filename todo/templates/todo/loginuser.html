@@ -17,7 +17,7 @@
     <div class="form-group">
         <label for="exampleInputEmail1">Username</label>
         <input type="test" name = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">Username is unique for everyone</small>
+        <small class="form-text text-muted">Username is unique for everyone</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
@@ -30,6 +30,9 @@
       <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+<small class="form-text text-muted" style="margin-top: 10px;"></small>Don't have account <a href="{% url 'signupuser' %}">SignUp</a></small>
+
 </div>
+
 
 {% endblock %} 

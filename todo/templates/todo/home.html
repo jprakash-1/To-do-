@@ -1,16 +1,22 @@
 {% extends 'todo/base.html' %}
 
 {% block title %}
-    <title>Home</title>
+<title>Home</title>
 {% endblock %}
 
 
 {% block content %}
 
-<div style="margin-top: 50px;"></div>
-<h1>Home page</h1>
-{% load static %}
+<div style="margin-top: 20px;">
+    <h1>Home page</h1>
+    {% load static %}
 
-<img src="{% static 'todo/1.jpg' %}" width="1000">
+    <div style="margin: 125px 250px; text-align: center;">
+        <h1>Simply Your Todos. woo!</h1>
+        <h4>Life is fun. Only if it is syncronized. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Amet dolor totam non magni iure ab quia nulla, ipsa, atque ut eaque eligendi 
+            ullam est quo tempora modi! Animi, iusto expedita!</h4>
+    </div>
+</div>
 
 {% endblock %}
