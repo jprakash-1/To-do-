@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
-from .forms import TodoForm
+from .forms import TodoForm,UserRegistrationForm
 from .models import Todo
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required           # this will make sure that we need to login to use this function.
@@ -17,12 +17,12 @@ def home(request):
 def signupuser(request):
     # Here we get into signup page didn't filled the detail and submit it.
     if request.method == 'GET':
-        return render(request,'todo/signupuser.html',{'forms':UserCreationForm()})
+        return render(request,'todo/signupuser.html',{'forms':UserRegistrationForm()})
     else :
         # Here we get into signup page did fill the detail and submit it.
         if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.create_user(request.POST['username'],password = request.POST['password1'])
+                user = User.objects.create_user(request.POST['username'],password = request.POST['password1'],email = request.POST['email'])
                 user.save()             # Save the user detail in the database
                 # When user signed in redirect to new url.
                 login(request,user)
@@ -30,11 +30,11 @@ def signupuser(request):
 
             # Check Weather username is unique or not. 
             except IntegrityError:     
-                return render(request,'todo/signupuser.html',{'forms':UserCreationForm(),'error':'Username is already taken try other!'})
+                return render(request,'todo/signupuser.html',{'forms':UserRegistrationForm(),'error':'Username is already taken try other!'})
 
         else:
             # Tell the use user password didn't match.
-            return render(request,'todo/signupuser.html',{'forms':UserCreationForm(),'error':'Password did not match'})
+            return render(request,'todo/signupuser.html',{'forms':UserRegistrationForm(),'error':'Password did not match'})
 
 
 def about(request):
