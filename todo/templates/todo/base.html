@@ -52,8 +52,16 @@
   </div>
   <div class="container">
     <div style="margin-top: 100px;">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message}}
+      </div>
+      {% endfor %}
+    {% endif %}
       {% if user.is_authenticated %}
-      Hello {{ user.username}} <br>
+      Hello {{ user.username}}  <img class = 'rounded-circle' height="25px" src="{{ user.profile.image.url }}">
+      <br>
       {% endif %}
     </div>
     {% block content %}

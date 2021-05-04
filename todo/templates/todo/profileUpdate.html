@@ -1,0 +1,29 @@
+{% extends 'todo/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <title>Create Todo</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div style="margin-top: 100px;">
+
+<h1>Profile Update</h1>
+<h2>{{ error }}</h2>
+<div class="container">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Update Profile</legend>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+    </fieldset>
+
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+
+{% endblock %} 

@@ -3,9 +3,10 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
-from .forms import TodoForm,UserRegistrationForm
+from .forms import TodoForm,UserRegistrationForm,UserUpdateForm,ProfileUpdateForm
 from .models import Todo
 from django.utils import timezone
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required           # this will make sure that we need to login to use this function.
 
 
@@ -125,3 +126,33 @@ def deletetodo(request,todo_pk):
 @login_required
 def profile(request):
     return render(request,'todo/profile.html')
+
+@login_required
+def profileUpdate(request):
+    if  request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid() :
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been Updated !')
+            return redirect('profile')
+        else :
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm(instance=request.user.profile)
+
+            context = {
+                'u_form':u_form,
+                'p_form':p_form
+            }
+            return render(request,'todo/profileUpdate.html',context,{'error':'Bad Data ! Try Again' })
+
+    else :
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+        context = {
+            'u_form':u_form,
+            'p_form':p_form
+        }
+        return render(request,'todo/profileUpdate.html',context)

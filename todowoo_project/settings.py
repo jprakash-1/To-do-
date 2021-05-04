@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo.apps.TodoConfig',
+    'crispy_forms',
 
 ]
 
@@ -128,3 +129,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = '/login/'
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
