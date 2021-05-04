@@ -1,0 +1,24 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+    <title> Profile</title>
+{% endblock %}
+
+
+{% block content %}
+<div style="padding: 50px 0 0 0 ;">
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" height="200px" src='{{ user.profile.image.url }}'>
+            <div class="media-body">
+                <h2 class="account-heading">
+                    {{ user.username }}
+                </h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 

@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from todo import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Auth
     path('signup/',views.signupuser,name = 'signupuser'),
+    path('profile/',views.profile,name = 'profile'),
     path('logout/',views.logoutuser,name = 'logoutuser'),
     path('login/',views.loginuser,name = 'loginuser'),
 
@@ -35,5 +38,7 @@ urlpatterns = [
     path('todo/<int:todo_pk>/complete',views.completetodo,name ='completetodo'),
     path('todo/<int:todo_pk>/delete',views.deletetodo,name ='deletetodo'),
     
-
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+ 

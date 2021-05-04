@@ -121,3 +121,7 @@ def deletetodo(request,todo_pk):
     if  request.method == 'POST':
         todo.delete()                           # Delete the data from database.
         return redirect('current')
+
+@login_required
+def profile(request):
+    return render(request,'todo/profile.html')
