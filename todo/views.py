@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
-from .forms import TodoForm,UserRegistrationForm,UserUpdateForm,ProfileUpdateForm
+from .forms import TodoForm,UserRegistrationForm,UserUpdateForm,ProfileUpdateForm,FeedbackForm
 from .models import Todo
 from django.utils import timezone
 from django.contrib import messages
@@ -156,3 +156,15 @@ def profileUpdate(request):
             'p_form':p_form
         }
         return render(request,'todo/profileUpdate.html',context)
+
+@login_required
+def feedback(request):
+    if request.method == 'GET':
+        return render(request,'todo/feedback.html',{'form':FeedbackForm()})
+    else :
+        try :
+            form = FeedbackForm(request.POST)           # Put all the data we get from webpage 
+            newtodo = form.save()                             # Saving the value.
+            return redirect('home')
+        except ValueError :
+            return render(request,'todo/feedback.html',{'form':FeedbackForm(),'error':"Bad Data Try Again !"})
