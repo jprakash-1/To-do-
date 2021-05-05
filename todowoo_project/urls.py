@@ -34,6 +34,7 @@ urlpatterns = [
     path('',views.home,name = 'home'),
     path('about/',views.about,name = 'about'),
     path('create/',views.createtodo,name = 'createtodo'),
+    path('upload/',views.imageupload,name = 'imageupload'),
     path('current/',views.current,name = 'current'),
     path('completedtodos/',views.completedtodos,name = 'completedtodos'),
     path('todo/<int:todo_pk>',views.viewtodo,name ='viewtodo'),

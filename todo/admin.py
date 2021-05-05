@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Todo,Profile,Feedback
+from .models import Todo,Profile,Feedback,Image
 
 # Register your models here.
 
@@ -8,6 +8,7 @@ from .models import Todo,Profile,Feedback
     Without this class we can not see the created field. 
 """
 admin.site.register(Profile)
+admin.site.register(Image)
 
 class FeedbackAdmin(admin.ModelAdmin):
     readonly_fields = ('created',)

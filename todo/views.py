@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
-from .forms import TodoForm,UserRegistrationForm,UserUpdateForm,ProfileUpdateForm,FeedbackForm
+from .forms import TodoForm,UserRegistrationForm,UserUpdateForm,ProfileUpdateForm,FeedbackForm,ImageForm
 from .models import Todo
 from django.utils import timezone
 from django.contrib import messages
@@ -168,3 +168,15 @@ def feedback(request):
             return redirect('home')
         except ValueError :
             return render(request,'todo/feedback.html',{'form':FeedbackForm(),'error':"Bad Data Try Again !"})
+
+
+def imageupload(request):
+    if request.method == 'GET':
+        return render(request,'todo/imageupload.html',{'form':ImageForm()})    
+    else :
+        try :
+            form = ImageForm(request.POST,request.FILES)           # Put all the data we get from webpage 
+            newtodo = form.save()                             # Saving the value.
+            return redirect('home')
+        except ValueError :
+            return render(request,'todo/imageupload.html',{'form':ImageForm(),'error':"Bad Data Try Again !"})
